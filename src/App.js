@@ -1,12 +1,19 @@
 import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/index';
+import TaskContextProvider from './context/taskContext';
+import Modal from './components/modal';
+import ModalProvider from './context/modalContext';
 
 function App() {
   return (
     <div className="App">
-      <h1>Task Manager</h1>
-      <RouterProvider router={router} />
+      <TaskContextProvider>
+        <ModalProvider>
+        <Modal/>
+        <RouterProvider router={router} />
+        </ModalProvider>
+      </TaskContextProvider>
     </div>
   );
 }

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+import { TaskContext } from '../../context/taskContext';
 
 function AllTask() {
+const {allTask} = useContext(TaskContext)
+
+useEffect(()=>{
+  console.log('-----allTask--->', allTask)
+}, [allTask])
+
   return (
-    <h1>AllTask</h1>
+    <div>
+      {
+       allTask?.length ? allTask?.map((value)=><div>{value?.title}</div>): <div>No Task</div>
+      }
+      </div>
   );
 }
 

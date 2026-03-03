@@ -12,10 +12,6 @@ export const NavbarContainer = styled('div')(({ theme }) => ({
   boxShadow: theme.shadows[1],
   width: '100%',
   height: '90px',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
   zIndex: 1000,
   '& .MuiTypography-root': {
     fontSize: '1.5rem',
