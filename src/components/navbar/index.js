@@ -1,18 +1,11 @@
 import React from 'react';
-import { NavbarContainer, StyledNavLink } from './style';
+import { Box, NavbarContainer, NavBarSubContainer, StyledNavLink } from './style';
 import Button from '../button';
 
 const Navbar = ({ navItems=[], staticButtons=[] }) => {
   return (
     <NavbarContainer className="navbar">
-      <div style={{
-        // flex:1,
-        display:'flex',
-        alignItems:'center',
-        rowGap:'16px',
-        columnGap:'16px',
-        flexWrap:'wrap'
-      }}>
+      <NavBarSubContainer >
         {navItems?.length ? (
         navItems.map((item) => (
           <Button
@@ -26,12 +19,12 @@ const Navbar = ({ navItems=[], staticButtons=[] }) => {
           </Button>
         ))
       ) : (
-        <>no nav items</>
+        <Box>no nav items</Box>
       )}
-        </div>
-        <div>
+        </NavBarSubContainer>
+        <Box>
           {staticButtons.length ? staticButtons.map((value)=>(<Button title={value.title} onClick={value.onClick} customProps={value.customProps}/>)) :<></>}
-        </div>
+        </Box>
     </NavbarContainer>
   );
 };

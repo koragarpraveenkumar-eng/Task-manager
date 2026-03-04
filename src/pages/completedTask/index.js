@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { TaskContext } from '../../context/taskContext';
 import { ModalContext } from '../../context/modalContext';
 import TaskCard from '../../components/taskCard';
-import { Box } from './style';
+import { Box, CompletedTaskContainer } from './style';
 
 
 function CompletedTask() {
@@ -15,13 +15,13 @@ function CompletedTask() {
   }
 
   return (
-     <Box>
+     <CompletedTaskContainer>
       {
        completedTask?.length 
        ?completedTask?.map((value)=><TaskCard task={value} onEdit={onEdit}/>)
        :<Box>No Task</Box>
       }
-     </Box>
+     </CompletedTaskContainer>
   );
 }
 

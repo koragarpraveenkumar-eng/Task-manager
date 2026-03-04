@@ -2,7 +2,7 @@ import React,{useContext} from 'react';
 import { TaskContext } from '../../context/taskContext';
 import TaskCard from '../../components/taskCard';
 import { ModalContext } from '../../context/modalContext';
-import { Box } from './style';
+import { Box, PendingTaskcontainer } from './style';
 
 function PendingTask() {
   const { pendingTask } = useContext(TaskContext)
@@ -14,13 +14,13 @@ function PendingTask() {
   }
 
   return (
-     <Box>
+     <PendingTaskcontainer>
       {
        pendingTask?.length 
        ?pendingTask?.map((value)=><TaskCard task={value} onEdit={onEdit}/>)
        :<Box>No Task</Box>
       }
-     </Box>
+     </PendingTaskcontainer>
   );
 }
 

@@ -15,7 +15,8 @@ import {
   TextInput,
 } from './style';
 import { TaskContext } from '../../context/taskContext';
-import {ModalContext} from '../../context/modalContext'
+import {ModalContext} from '../../context/modalContext';
+import { status } from '../../constants/constants';
 
 const TaskForm = ({ taskToEdit, onClose }) => {
     const [formData, setFormData] = useState({
@@ -66,7 +67,6 @@ const TaskForm = ({ taskToEdit, onClose }) => {
         handleUpdateTask(taskToEdit, formData);
         clearTaskToEdit()
     } else {
-        console.log('------>', formData)
         handleAddTask(formData);
     }
     clearFormData()
@@ -126,9 +126,9 @@ const TaskForm = ({ taskToEdit, onClose }) => {
           value={formData.status}
           onChange={handleChange}
         >
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
+          <option value={status.pending}>{status.pending}</option>
+          <option value={status.processing}>{status.processing}</option>
+          <option value={status.completed}>{status.completed}</option>
         </Select>
         </FieldControl>
       </FieldRow>

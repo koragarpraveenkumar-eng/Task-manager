@@ -2,6 +2,9 @@ import { styled } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
 
 
+export const Box = styled('div')(()=>({
+}))
+
 export const NavbarContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
@@ -40,3 +43,11 @@ export const StyledNavLink = styled(NavLink)(({ theme }) => ({
     color: theme.palette.common.white,
   },
 }));
+
+export const NavBarSubContainer = styled('div')(()=>({
+  display:'flex',
+  alignItems:'center',
+  columnGap:'16px',
+  rowGap:'16px',
+  flexWrap:'wrap'
+})) 
