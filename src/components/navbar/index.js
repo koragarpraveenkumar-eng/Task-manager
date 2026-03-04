@@ -1,33 +1,37 @@
 import React from 'react';
-import { NavbarContainer } from './style';
+import { NavbarContainer, StyledNavLink } from './style';
 import Button from '../button';
-import { NavLink } from 'react-router-dom';
 
-const Navbar = ({ navItems }) => {
+const Navbar = ({ navItems=[], staticButtons=[] }) => {
   return (
     <NavbarContainer className="navbar">
-      {navItems?.length ? (
+      <div style={{
+        // flex:1,
+        display:'flex',
+        alignItems:'center',
+        rowGap:'16px',
+        columnGap:'16px',
+        flexWrap:'wrap'
+      }}>
+        {navItems?.length ? (
         navItems.map((item) => (
           <Button
             key={item.key}
             onClick={item.onClick}
             customProps={item.customProps}
           >
-            <NavLink
-              to={item.to || '/'}
-              style={({ isActive }) => ({
-                textDecoration: 'none',
-                backgroundColor: isActive ? 'blue' : 'white',
-                color: isActive ? 'white' : 'black',
-              })}
-            >
+            <StyledNavLink to={item.to || '/'}>
               {item.title}
-            </NavLink>
+            </StyledNavLink>
           </Button>
         ))
       ) : (
         <>no nav items</>
       )}
+        </div>
+        <div>
+          {staticButtons.length ? staticButtons.map((value)=>(<Button title={value.title} onClick={value.onClick} customProps={value.customProps}/>)) :<></>}
+        </div>
     </NavbarContainer>
   );
 };
