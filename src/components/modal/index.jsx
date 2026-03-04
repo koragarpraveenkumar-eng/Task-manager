@@ -5,7 +5,7 @@ import TaskForm from '../taskForm'
 
 function Modal() {
 
-    const { open, handleModalOpen } = useContext(ModalContext)
+    const { open, handleModalOpen, taskToEdit } = useContext(ModalContext)
 
     const display = open ? 'block' : 'none'
     useEffect(() => {
@@ -23,7 +23,7 @@ function Modal() {
                 <ModalSubContainer
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <TaskForm onClose={handleClose}></TaskForm>
+                    <TaskForm taskToEdit={taskToEdit} onClose={handleClose}></TaskForm>
                 </ModalSubContainer>
             </Box>
         </ModalContainer>
