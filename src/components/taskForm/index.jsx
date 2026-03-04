@@ -15,6 +15,7 @@ import {
   TextInput,
 } from './style';
 import { TaskContext } from '../../context/taskContext';
+import {ModalContext} from '../../context/modalContext'
 
 const TaskForm = ({ taskToEdit, onClose }) => {
     const [formData, setFormData] = useState({
@@ -25,8 +26,8 @@ const TaskForm = ({ taskToEdit, onClose }) => {
     });
     const [errors, setErrors] = useState({});
     
-    const {handleAddTask} = useContext(TaskContext)
-    //   const { addTask, updateTask } = useTaskContext();
+    const {handleAddTask, handleUpdateTask} = useContext(TaskContext)
+    const {clearTaskToEdit } = useContext(ModalContext)
 
   useEffect(() => {
     if (taskToEdit) {
@@ -62,10 +63,11 @@ const TaskForm = ({ taskToEdit, onClose }) => {
     if (!validate()) return;
 
     if (taskToEdit) {
-    //   updateTask(taskToEdit.id, formData);
+        handleUpdateTask(taskToEdit, formData);
+        clearTaskToEdit()
     } else {
         console.log('------>', formData)
-        handleAddTask(`${formData.status}`,formData);
+        handleAddTask(formData);
     }
     clearFormData()
     onClose();
