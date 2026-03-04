@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 
+export const Box = styled("div")(() => ({}));
 export const ResponsiveGrid = styled("div")(({ theme }) => ({
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)", // default (xs)
@@ -32,4 +33,11 @@ export const ResponsiveGrid = styled("div")(({ theme }) => ({
     columnGap:'16px',
     alignItems:'center',
     textAlign:'center'
+  }))
+
+  export const ListContainer = styled("div")(()=>({
+    marginTop: "10px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
   }))

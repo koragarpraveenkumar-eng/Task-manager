@@ -6,9 +6,8 @@ export const RootContainer = styled('div')(()=>({
 
 export const OutletContainer = styled('div')(()=>({
     width:'100%',
-
-        padding:'10px',
-        boxSizing:'border-box',
-        position:'relative',
-        top:'90px'
+    padding:'10px',
+    boxSizing:'border-box',
+    position:'relative',
+    top:'90px'
 }))
