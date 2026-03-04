@@ -5,36 +5,89 @@ export const TaskContext = createContext();
 export default function TaskContextProvider({ children }) {
   const [completedTask, setCompletedTask] = useState([])
   const [pendingTask, setPendingTask] = useState([]);
-  const [processingTask, setProcessing] = useState([]);
+  const [progressingTask, setProgressing] = useState([]);
   const [allTask, setAllTask] = useState([])
 
   useEffect(()=>{
-    setAllTask(()=>[...completedTask, ...pendingTask, ...processingTask])
-  },[completedTask,pendingTask,processingTask])
+    setAllTask(()=>[...completedTask, ...pendingTask, ...progressingTask])
+  },[completedTask,pendingTask,progressingTask])
   
   const values = {
     completedTask,
     pendingTask,
-    processingTask,
+    progressingTask,
     allTask,
-    handleAddTask
+    handleAddTask,
+    deleteTask,
+    handleUpdateTask
   };
 
-  function handleAddTask(type, task){
+  function handleAddTask(task){
     const data = {
       id: (Math.random()),
       ...task
     }
 
-    switch(type){
+    switch(task.status){
       case 'Pending': setPendingTask((prev)=>[...prev, data]);
       return;
       case 'Completed': setCompletedTask((prev)=>[...prev, data]);
       return;
-      case 'In Progress': setProcessing((prev)=>[...prev, data]);
+      case 'In Progress': setProgressing((prev)=>[...prev, data]);
       return;
       default : return
     }
+  }
+
+  function deleteTask(data){
+    switch(data.status){
+      case 'Pending' : setPendingTask(prev=>remove(data.id, prev));
+      break;
+      case 'In Progress' : setProgressing((prev)=>remove(data.id, prev));
+      break;
+      case 'Completed' : setCompletedTask((prev)=>remove(data.id, prev))
+    }
+  }
+
+  function handleUpdateTask(editToTask, formData){
+    if(editToTask.status === formData.status){
+      switch(editToTask.status){
+        case 'Pending' : setPendingTask(prev=>prev.map((value)=>{
+          if(value.id == editToTask.id){
+            return {
+              ...value.id,
+              ...formData
+            }
+          }
+        }));
+        break;
+        case 'In Progress' : setProgressing(prev=>prev.map((value)=>{
+          if(value.id == editToTask.id){
+            return {
+              ...value.id,
+              ...formData
+            }
+          }
+        }));
+        break;
+        case 'Completed' : setCompletedTask(prev=>prev.map((value)=>{
+          if(value.id == editToTask.id){
+            return {
+              ...value.id,
+              ...formData
+            }
+          }
+        }));
+      }
+    }else{
+      handleAddTask(formData)
+      deleteTask(editToTask)
+    }
+
+  }
+
+  function remove(id, array){
+    return array.filter((value)=> value.id != id)
   }
   return (
     <TaskContext.Provider value={values}>
