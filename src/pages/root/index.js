@@ -16,7 +16,7 @@ function Root() {
   }]
 
   return (
-    <RootContainer style={{height:'100%'}}>
+    <RootContainer>
         <Navbar navItems={navItems} staticButtons={staticButtons}/>
       <OutletContainer>
         <Outlet />
